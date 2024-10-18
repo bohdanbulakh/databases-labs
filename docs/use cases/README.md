@@ -14,7 +14,7 @@
 
     actor "Користувач" as User #e8e9ff
     actor "Учасник проєкту" as ProjectMember #e8ffe9
-    actor "Проєктний менеджер" as ProjectManager #ffffe8
+    actor "Проєктний менеджер" as ProjectManager #ffffc8
     actor "Адміністратор" as Admin #ffe8e8
 
     ProjectMember -u-|> User
@@ -38,9 +38,9 @@
     ProjectMember -l-> TaskManage
     ProjectMember -r-> LeaveProject
 
-    usecase "Керувати\nпроєктами" as ProjectManage #ffffe8
-    usecase "Керувати\nучасниками проєкту" as ProjectMemberManage #ffffe8
-    usecase "Призначити\nзавдання учаснику" as AssignTask #ffffe8
+    usecase "Керувати\nпроєктами" as ProjectManage #ffffc8
+    usecase "Керувати\nучасниками проєкту" as ProjectMemberManage #ffffc8
+    usecase "Призначити\nзавдання учаснику" as AssignTask #ffffc8
 
     LeaveProject -d[hidden]-> ProjectManage
     ProjectMemberManage -u[hidden]-> TaskManage
@@ -105,13 +105,13 @@
 
     actor "Учасник проєкту" as ProjectMember #e8ffe9
 
-    usecase "Управління\nзавданнями" as TaskManagement #e4ffdb
+    usecase "Управління завданнями" as TaskManagement #e4ffdb
 
-    usecase "Створити\nзавдання" as CreateTask 
-    usecase "Редагувати\nзавдання" as EditTask 
-    usecase "Видалити\nзавдання" as DeleteTask 
-    usecase "Коментувати\nзавдання" as CommentTask 
-    usecase "Вийти\nз проєкту" as LogOut #e4ffdb
+    usecase "Створити завдання" as CreateTask 
+    usecase "Редагувати завдання" as EditTask 
+    usecase "Видалити завдання" as DeleteTask 
+    usecase "Коментувати завдання" as CommentTask 
+    usecase "Вийти з проєкту" as LogOut #e4ffdb
 
 
     ProjectMember -l-> LogOut
@@ -135,20 +135,20 @@
 
 @startuml
 
-    actor "Проєктний менеджер" as ProjectManager
+    actor "Проєктний менеджер" as ProjectManager #ffffc8
     
-    usecase "Керування проєктом" as ProjectManage
+    usecase "Керування проєктом" as ProjectManage #ffffc8
     usecase "Звіт проєкту" as ProjectReport
     usecase "Створити проєкт" as CreateProject
     usecase "Редагувати проєкт" as EditProject
     usecase "Видалити проєкт" as DeleteProject
     
-    usecase "Керування учасниками проєкту" as ProjectMemberManagement
+    usecase "Керування учасниками проєкту" as ProjectMemberManagement #ffffc8
     usecase "Додати учасника" as AddMember
     usecase "Видалити учасника" as DeleteMember
     usecase "Прийняти запит користувача\nна приєднання до проєкту" as AcceptUserConnectRequest
     
-    usecase "Призначити завдання учаснику" as AssignTaskToMember
+    usecase "Призначити\nзавдання учаснику" as AssignTaskToMember #ffffc8
     
     ProjectManager -r-> ProjectManage
     ProjectManager -l-> ProjectMemberManagement
@@ -330,7 +330,7 @@ stop;
 | УЧАСНИКИ                               | Користувач, система                                                                                     |
 | ПЕРЕДУМОВИ                             | <ul><li>Користувач має обліковий запис в системі</li><li>Користувач увійшов в обліковий запис</li></ul> |
 | РЕЗУЛЬТАТ                              | Видалений обліковий запис                                                                               |
-| ВИКЛЮЧНІ СИТУАЦІЇ                      | <ul><li>`DeleteAccount_InvalidPasswordEXC`<br>користувач ввів неправильний пароль</li></ul>             |
+| ВИКЛЮЧНІ СИТУАЦІЇ                      | `DeleteAccount_InvalidPasswordEXC`<br>користувач ввів неправильний пароль                               |
 
 <div style="
     border-radius:4px;
@@ -782,7 +782,7 @@ stop;
 
 | <div style="text-align: left">ID</div> | <div style="text-align: left">`EditProject`</div>                                                                                                                                                |
 |----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| НАЗВА                                  | Редагувати проект                                                                                                                                                                                |
+| НАЗВА                                  | Редагувати проєкт                                                                                                                                                                                |
 | УЧАСНИКИ                               | Проєктний менеджер, система                                                                                                                                                                      |
 | ПЕРЕДУМОВИ                             | Проєктний менеджер створив проєкт                                                                                                                                                                |
 | РЕЗУЛЬТАТ                              | Відредагований проєкт                                                                                                                                                                            |

@@ -49,7 +49,7 @@ left to right direction
     entity ProjectMember #a6ff4d
     entity ProjectMember.id #d9ffb3
 
-    ProjectMember.id -r-* ProjectMember
+    ProjectMember.id -l-* ProjectMember
 
 
     entity Project #4dff79
@@ -81,9 +81,9 @@ left to right direction
     entity SupportRequest.description #ffb3ec
     entity SupportRequest.topic #ffb3ec
 
-    SupportRequest.id -u-* SupportRequest
-    SupportRequest.topic -u-* SupportRequest
-    SupportRequest.description -u-* SupportRequest
+    SupportRequest.id -d-* SupportRequest
+    SupportRequest.topic -d-* SupportRequest
+    SupportRequest.description -d-* SupportRequest
 
     entity SupportRequestAnswer #ff4d4d
     entity SupportRequestAnswer.id #ffb3b3
@@ -92,18 +92,16 @@ left to right direction
     SupportRequestAnswer.id -d-* SupportRequestAnswer
     SupportRequestAnswer.feedback -d-* SupportRequestAnswer
 
-    User "1,1" -d-- "0,*" ProjectMember
-    Grant "1,1" -r- "0,*" Role
+    User "1,1" -d--- "0,*" ProjectMember
+    Role "1,1" -l- "0,*" Grant
 
-    ProjectMemberRole "0,*" -l-- "1,1" Role
-    ProjectMemberRole "0,*" -u-- "1,1" ProjectMember
-    ProjectMember "0,*" -u-- "1,1" Project
-    Project "1,1" -u-- "0,*" Task
-    Task -l[hidden]-> User
-    SupportRequest.topic -l[hidden]-> Project.status
+    ProjectMemberRole "0,*" -l- "1,1" Role
+    ProjectMemberRole "0,*" -d- "1,1" ProjectMember
+    ProjectMember "0,*" -u- "1,1" Project
+    Project "1,1" -u- "0,*" Task
 
-    SupportRequest "0,*" -r-- "1,1" User
-    SupportRequestAnswer "0,*" -r-- "0,1" SupportRequest
+    SupportRequest "0,*" - "1,1" User
+    SupportRequestAnswer "0,*" -r- "1,1" SupportRequest
 
 @enduml
 

@@ -174,21 +174,24 @@ entity SupportRequestAnswer {
 entity ConnectToProjectRequest {
 +id: uuid
 +user_id: uuid
++project_id: uuid
 }
 
 entity ProjectMember {
 +id: uuid
++project_id: uuid
 +user_id: uuid
 }
 
 entity ProjectMemberRole {
 +id: uuid
 +project_member_id: uuid
++role_id: uuid
 }
 
 entity Role {
 +id: uuid
-+project_member_role_id: uuid
++project_id: uuid
 +name: text
 }
 
@@ -198,6 +201,34 @@ entity Grant {
 +permission: text
 }
 
+entity Project {
++id: uuid
++status: text
++name: text
++description: text
+}
+
+entity Task {
++id: uuid
++project_id: uuid
++name: text
++description: text
++status: text
++deadline: date
+}
+
+entity TaskComment {
++id: uuid
++task_id: uuid
++text: text
+}
+
+entity Assignment {
++id: uuid
++task_id: uuid
++project_member_id: uuid
+}
+
 User "1,1" --d- "0,*" SupportRequest
 User "1,1" --d- "0,*" ConnectToProjectRequest
 User "1,1" --d- "0,*" ProjectMember
@@ -205,10 +236,19 @@ User "1,1" --d- "0,*" ProjectMember
 SupportRequest "1,1" --d- "0,*" SupportRequestAnswer
 
 ProjectMember "1,1" --d- "0,*" ProjectMemberRole
+ProjectMember "1,1" --d- "0,*" Assignment
 
 ProjectMemberRole "0,*" --d- "1,1" Role
 
 Role "1,1" --d- "0,*" Grant
+
+Project "1,1"  --d- "0,*" ProjectMember
+Project "1,1"  --d- "0,*" Role
+Project "1,1"  --d- "0,*" ConnectToProjectRequest
+Project "1,1"  --d- "0,*" Task
+
+Task "1,1" --d- "0,*" TaskComment
+Task "1,1" --d- "0,*" Assignment
 
 @enduml
 
